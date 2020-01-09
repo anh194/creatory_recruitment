@@ -1,45 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import { Videos } from "./components/Videos"
+import { VideoForm } from "./components/VideoForm"
+import { Container } from "semantic-ui-react";
 
 function App() {
-  const [apiData, setApiData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [videos, setVideos] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-        setIsLoading(true);
-        setIsError(false);
-        try {
-          const result = await axios.get(
-            '/results'
-          );
-          setIsLoading(false);
-          setApiData(result.data);
-        }
-        catch (error) {
-          setIsLoading(false);
-          setIsError(true);
-        }
-    };
+  // useEffect(() => {
+  //   fetch("/video?video_id=FiFUGE3_kqY").then(response =>
+  //     response.json().then(data => {
+  //       setVideos(data);
+  //       console.log(videos);
+  //       console.log(data);
+  //     })
+  //   );
+  // }, []); 
 
-    fetchData();
-  }, []);
+  // console.log(videos)
+
+  //<Videos videos={videos} />
 
   return (
     <div className="App">
-      <h1>Results</h1>
-      <p>Please visualize latest video measurement grouped by video and channel below (as you see fit).</p>
-      <ul>
-        {
-          apiData.map(result => (
-            <li key={result.id}>{result.id}: {result.measurement_date}</li>
-          ))
-        }
-      </ul>
+    <Container style={ { marginTop: 40} }>
+      <VideoForm onNewVideo={video => setVideos(currentVideos => video)}/>
+      <Videos videos={videos} />
+    </Container>
     </div>
   );
 }
-
 export default App;

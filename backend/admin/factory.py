@@ -10,6 +10,7 @@ import os
 
 from flask import Flask, current_app
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 import locale
 
@@ -41,6 +42,7 @@ def create_app(package_name, package_path, settings_override=None, register_secu
 	app.config.from_object(settings_override)
 	
 	app.app_context().push()
+	CORS(app)
 	db.init_app(app)
 	register_blueprints(app, package_name, package_path)
 
