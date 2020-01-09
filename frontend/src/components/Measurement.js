@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Accordion, Icon } from "semantic-ui-react";
 
-export default class Videos extends Component {
+
+export default class Measurement extends Component {
   state = { activeIndex: 1 }
 
   handleClick = (e, titleProps) => {
@@ -15,23 +16,23 @@ export default class Videos extends Component {
 
   render() {
     const { activeIndex } = this.state
-    if(this.props.videos){
+    if(this.props.measurement){
     	return (
-      <Accordion styled style={ { marginTop: 40} }>
+      <Accordion styled style={ { marginTop:40 } }>
         <Accordion.Title
           active={activeIndex === 0}
           index={0}
           onClick={this.handleClick}
         >
           <Icon name='dropdown' />
-          {this.props.videos.title}
+          Measurement
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 0}>
-          	<p> <b>Date</b>: {this.props.videos.date}</p>
-			<p> <b>Duration</b>: {this.props.videos.duration}</p>
-			<p> <b>Channel ID</b>:{this.props.videos.channel_id}</p>
-			<p> <b>Youtube ID</b>: {this.props.videos.youtube_id}</p>
-			<p> <b>Description</b>: {this.props.videos.description}</p>
+          	<p> <b>Measure time</b>: {this.props.measurement.time}</p>
+			<p> <b>View</b>: {this.props.measurement.view}</p>
+			<p> <b>Comment</b>:{this.props.measurement.comment}</p>
+			<p> <b>Like</b>: {this.props.measurement.like}</p>
+			<p> <b>Dislike</b>: {this.props.measurement.dislike}</p>
         </Accordion.Content>
 
       </Accordion>

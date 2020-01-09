@@ -3,29 +3,40 @@ import { Form, Input, Button } from 'semantic-ui-react'
 
 export const VideoForm = ({onNewVideo}) => {
 	const [videoId, setVideoId] = useState('')
-	// const [videos, setVideos] = useState()
 
 	return(
 		<Form>
 			<Form.Field>
-				<Input placeholder="Video ID" 
+				<Input placeholder="Video ID. Example: wdH26D8Ssww" 
 				value={videoId} 
 				onChange={e => setVideoId(e.target.value)}/>
 			</Form.Field>
 			<Form.Field>
 				<Button onClick={async() => {
-					var link = '/video?video_id=' + videoId
-					var result
-					const response = await fetch(link).then(
-						response => response.json().then(
+					var link_video = '/video?video_id=' + videoId
+					var link_measurement = '/measurement?video_id=' + videoId
+					var result_video
+					var result_measurement
+
+					const response_v = await fetch(link_video).then(
+						response_v => response_v.json().then(
 							data => {
-								result = data
+								result_video = data
 							}
 						)
 					)
 
+					const response_m = await fetch(link_measurement).then(
+						response_m => response_m.json().then(
+							data => {
+								result_measurement = data
+							}
+						)
+					)
+
+					var format_result = {"video": result_video, "measurement": result_measurement};
 					console.log("Work");
-					onNewVideo(result)
+					onNewVideo(format_result)
 				}}>
 					Search
 				</Button>
