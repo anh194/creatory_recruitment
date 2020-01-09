@@ -18,6 +18,7 @@ Since I do not have direct contact with the recruitment team, I have made assump
 * Run `npm start` in `frontend` folder, which run on port `3000`
 
 API and frontend:
+
 Endpoint |  Content
 ------------ | -------------
 localhost:3000 | The website
